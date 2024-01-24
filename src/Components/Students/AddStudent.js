@@ -47,7 +47,7 @@ const AddStudent = () => {
         <div className="flex justify-between  flex-wrap border-b px-10 sticky top-0 z-[1000] pt-10 bg-white">
           <div className="flex flex-col ">
             <label className="font-bold">
-              Name<span className="text-[#00df9a]">*</span>
+              Names<span className="text-[#00df9a]">*</span>
             </label>
             <input
               type="text"
