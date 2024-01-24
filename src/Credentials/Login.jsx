@@ -68,7 +68,7 @@ const Login = () => {
             Log in
           </button>
           <h5 className="cursor-pointer font-bold" onClick={redirectRegister}>
-            Register here...
+            Register here.....
           </h5>
         </form>
       </div>
