@@ -6,8 +6,8 @@ import PrivateRoute from "./Routespage/PrivateRoute";
 function App() {
   return (
     <div>
-      {isLoggedIn() ? <PrivateRoute /> : <PublicRoute />}
-      {/* <PrivateRoute /> */}
+      {/* {isLoggedIn() ? <PrivateRoute /> : <PublicRoute />} */}
+      <PrivateRoute />
     </div>
   );
 }

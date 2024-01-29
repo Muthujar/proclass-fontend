@@ -26,7 +26,6 @@ const Login = () => {
     console.log(data);
     ApiCall.post("http://192.168.0.153:4000/users/login", data, (resp) => {
       if (resp.token) {
-        console.log(resp);
         const cookieValue = cookie.save("token", resp.token);
         window.location.href = "/";
       } else {
@@ -68,7 +67,7 @@ const Login = () => {
             Log in
           </button>
           <h5 className="cursor-pointer font-bold" onClick={redirectRegister}>
-            Register here.....,.
+            Register here...
           </h5>
         </form>
       </div>

@@ -43,8 +43,8 @@ const AddStudent = () => {
   };
   return (
     <div>
-      <div className="w-full bg-white max-h-[83vh] rounded-md  overflow-y-auto">
-        <div className="flex justify-between  flex-wrap border-b px-10 sticky top-0 z-[1000] pt-10 bg-white">
+      <div className="w-full bg-white max-h-[83vh] rounded-md overflow-y-auto">
+        <div className="flex justify-between flex-wrap border-b px-10 sticky top-0 z-[1000] pt-10 bg-white">
           <div className="flex flex-col ">
             <label className="font-bold">
               Names<span className="text-[#00df9a]">*</span>
@@ -54,7 +54,7 @@ const AddStudent = () => {
               name="name"
               placeholder="Enter name"
               onChange={handleChange}
-              className="w-[300px] text-black mb-10 bg-white  p-1  focus:outline-none border-0 border-b-2 mt-3"
+              className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
           <div className="flex flex-col">
@@ -66,7 +66,7 @@ const AddStudent = () => {
               name="fatherName"
               placeholder="Enter father name"
               onChange={handleChange}
-              className="w-[300px] text-black mb-10 bg-white  p-1  focus:outline-none border-0 border-b-2 mt-3"
+              className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
           <div className="flex flex-col">
@@ -78,7 +78,7 @@ const AddStudent = () => {
               name="class"
               placeholder="Enter class details (eg: 2c)"
               onChange={handleChange}
-              className="w-[300px] text-black mb-10 bg-white  p-1  focus:outline-none border-0 border-b-2 mt-3"
+              className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
           <div className="flex flex-col">
@@ -90,7 +90,7 @@ const AddStudent = () => {
               name="blood"
               placeholder="Enter blood group"
               onChange={handleChange}
-              className="w-[300px] text-black mb-10 bg-white  p-1  focus:outline-none border-0 border-b-2 mt-3"
+              className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
           <div className="flex flex-col">
@@ -102,7 +102,7 @@ const AddStudent = () => {
               name="dob"
               placeholder=""
               onChange={handleChange}
-              className="w-[300px] text-black mb-10 bg-white  p-1  focus:outline-none border-0 border-b-2 mt-3"
+              className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
           <div className="flex flex-col">
@@ -112,10 +112,9 @@ const AddStudent = () => {
             <input
               type="text"
               name="healthIssue"
-              placeholder="Enter health issues 
-              if any"
+              placeholder="Enter health issues if any"
               onChange={handleChange}
-              className="w-[300px] text-black mb-10 bg-white  p-1  focus:outline-none border-0 border-b-2 mt-3"
+              className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
         </div>
@@ -128,7 +127,6 @@ const AddStudent = () => {
           </button>
         </div>
       </div>
-      <div></div>
     </div>
   );
 };

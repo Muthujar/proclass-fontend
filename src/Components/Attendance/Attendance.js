@@ -65,7 +65,7 @@ const Attendance = () => {
       },
     }));
     const postData = {
-      studentId: item.matchingData.studentId,
+      studentId: item?.matchingData?.studentId,
       date,
       reason: attendance.reason,
       present: {
@@ -77,7 +77,7 @@ const Attendance = () => {
     };
     console.log(postData);
     console.log(mergedArray);
-    item.matchingData
+    item?.matchingData
       ? ApiCall.post(
           `http://192.168.0.153:4000/attendence`,
           postData,
