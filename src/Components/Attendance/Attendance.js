@@ -36,6 +36,7 @@ const Attendance = () => {
   };
 
   const checkData = () => {
+    // const newDate = new Date(date);
     ApiCall.get(
       `http://192.168.0.153:4000/attendence?date=${date}`,
       (resp, error) => {
@@ -53,42 +54,34 @@ const Attendance = () => {
     const matchingData = checkbox.find((obj2) => obj2.studentId === obj1._id);
     return matchingData ? { ...obj1, matchingData } : obj1;
   });
-
   const handleChange = (item, e) => {
     const { name, checked } = e.target;
-    console.log(item);
-    setAttendance((prevData) => ({
-      ...prevData,
-      present: {
-        ...prevData.present,
-        [name]: checked,
-      },
-    }));
-    const postData = {
-      studentId: item?.matchingData?.studentId,
-      date,
-      reason: attendance.reason,
-      present: {
-        first_off: attendance.present.first_off,
-        second_off: attendance.present.second_off,
-      },
-      absence: attendance.absence,
-      od: attendance.od,
-    };
-    console.log(postData);
-    console.log(mergedArray);
-    item?.matchingData
-      ? ApiCall.post(
-          `http://192.168.0.153:4000/attendence`,
-          postData,
-          (resp) => {
-            if (resp) {
-              console.log(resp);
-            }
-          }
-        )
-      : ApiCall.patch(
-          `http://192.168.0.153:4000/attendence`,
+    console.log(checked);
+    setAttendance((prevData) => {
+      const newAttendance = {
+        ...prevData,
+        present: {
+          ...prevData?.present,
+          [name]: checked,
+        },
+      };
+
+      const postData = {
+        studentId: item._id,
+        date,
+        reason: newAttendance.reason,
+        present: {
+          first_off: newAttendance.present.first_off,
+          second_off: newAttendance.present.second_off,
+        },
+        absence: newAttendance.absence,
+        od: newAttendance.od,
+      };
+
+      if (item.matchingData) {
+        // Matching data exists, perform a PATCH request
+        ApiCall.patch(
+          `http://192.168.0.153:4000/attendence/${item.matchingData.studentId}`,
           postData,
           (resp) => {
             if (resp) {
@@ -96,8 +89,31 @@ const Attendance = () => {
             }
           }
         );
-  };
+      } else {
+        // No matching data, add matchingData object and perform a POST request
+        setAttendance((prevState) => ({
+          ...prevState,
+          matchingData: {
+            // Add properties from item that are needed
+            studentId: item._id,
+            // Add other properties as needed
+          },
+        }));
 
+        ApiCall.post(
+          "http://192.168.0.153:4000/attendence",
+          postData,
+          (resp) => {
+            if (resp) {
+              console.log(resp);
+            }
+          }
+        );
+      }
+
+      return newAttendance; // Return the updated state
+    });
+  };
   return (
     <div>
       <div className="w-full  bg-white max-h-[83vh] rounded-md  overflow-y-auto">
@@ -170,29 +186,25 @@ const Attendance = () => {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <input
                             type="checkbox"
-                            onChange={(e) => handleChange(item._id, e)}
+                            onChange={(e) => handleChange(item, e)}
                             name="second_off"
-                            checked={
-                              item?.present?.second_off
-                                ? item?.present?.second_off
-                                : false
-                            }
+                            checked={item?.matchingData?.present?.second_off}
                           />
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <input
                             type="checkbox"
-                            onChange={(e) => handleChange(item._id, e)}
+                            onChange={(e) => handleChange(item, e)}
                             name="absence"
-                            checked={item?.absence ? item?.absence : false}
+                            checked={item?.absence}
                           />
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <input
                             type="checkbox"
                             name="od"
-                            onChange={(e) => handleChange(item._id, e)}
-                            checked={item?.od ? item?.od : false}
+                            onChange={(e) => handleChange(item, e)}
+                            checked={item?.od}
                           />
                         </td>
                         {/* <td className="px-6 py-4 whitespace-nowrap">-</td> */}
