@@ -92,7 +92,10 @@ const StudentDataBase = () => {
                 ? data.map((items) => (
                     <tbody key={data.id}>
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td
+                          className="px-6 py-4 whitespace-nowrap"
+                          onClick={() => navigate(`/addstudent/${items._id}`)}
+                        >
                           {items.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">

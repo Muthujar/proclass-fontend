@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ApiCall from "../../Utils/API";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AddStudent = () => {
   const [data, setData] = useState({
@@ -11,12 +12,52 @@ const AddStudent = () => {
     blood: "",
     healthIssue: "",
   });
+
+
+  const [studentData,setStudentData]=useState({})
+
+  const [setId, id] = useState();
   const navigate = useNavigate();
+  const params  = useParams();
+
+  console.log(params)
+  const studentId = params?.id;
+
+  useEffect(() => {
+    if (studentId)getStudentData();
+  },[]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  const getStudentData = () => {
+    ApiCall.get(
+      `http://192.168.0.153:4000/students/${studentId}`,
+      (resp, error) => {
+        if (resp) {
+          console.log("API Response:", resp);
+          // navigate("/studendatabase");
+          setStudentData(resp)
+
+          // setData({
+          //   name: resp.name,
+          //   fatherName: resp.fatherName,
+          //   class: resp.class,
+          //   dob: resp.dob,
+          //   blood: resp.blood,
+          //   healthIssue: resp.healthIssue,
+          // });
+        } else if (error) {
+          console.error("Error in API call:", error);
+        } else {
+          console.log("Unexpected problem with the response");
+        }
+      }
+    );
+  };
+
   const handleAdd = () => {
     const postData = {
       name: data.name,
@@ -54,6 +95,8 @@ const AddStudent = () => {
               name="name"
               placeholder="Enter name"
               onChange={handleChange}
+              value={studentData?.name}
+
               className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
@@ -66,6 +109,8 @@ const AddStudent = () => {
               name="fatherName"
               placeholder="Enter father name"
               onChange={handleChange}
+              value={studentData?.fatherName}
+
               className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
@@ -78,6 +123,8 @@ const AddStudent = () => {
               name="class"
               placeholder="Enter class details (eg: 2c)"
               onChange={handleChange}
+              value={studentData?.class}
+
               className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
           </div>
@@ -89,6 +136,8 @@ const AddStudent = () => {
               type="text"
               name="blood"
               placeholder="Enter blood group"
+              value={studentData?.blood}
+
               onChange={handleChange}
               className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
@@ -101,6 +150,7 @@ const AddStudent = () => {
               type="date"
               name="dob"
               placeholder=""
+              value={studentData?.dob}
               onChange={handleChange}
               className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
@@ -113,6 +163,7 @@ const AddStudent = () => {
               type="text"
               name="healthIssue"
               placeholder="Enter health issues if any"
+              value={studentData?.healthIssue}
               onChange={handleChange}
               className="w-[300px] text-black mb-10 bg-white p-1 focus:outline-none border-0 border-b-2 mt-3"
             />
