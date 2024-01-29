@@ -33,6 +33,7 @@ const Register = () => {
     };
     ApiCall.post("http://192.168.0.153:4000/users/register", data, (resp) => {
       if (resp) {
+        console.log(resp)
         navigate("/login");
       }
     });

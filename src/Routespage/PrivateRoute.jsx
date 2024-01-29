@@ -23,6 +23,7 @@ const PrivateRoute = () => {
               <Route path="/" element={<Dashboard />} />
               <Route path="/studendatabase" element={<StudentDataBase />} />
               <Route path="/addstudent" element={<AddStudent />} />
+              <Route path="/addstudent/:id" element={<AddStudent />} />
               <Route path="/attendancetrack" element={<AttendanceTrack />} />
               <Route path="/attendance/:date" element={<Attendance />} />
               <Route path="/courses" element={<Courses />} />
